@@ -1,0 +1,7 @@
+{
+  "name": "certificados",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
