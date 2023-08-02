@@ -111,6 +111,10 @@ if (path !== undefined) {
 </script>
 
 <style scoped>
+ion-split-pane {
+  --side-max-width: 300px;
+}
+
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
