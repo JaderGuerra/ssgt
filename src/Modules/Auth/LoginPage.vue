@@ -1,55 +1,103 @@
 <template>
-  <ion-content>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          Welcome
-        </ion-card-title>
-        <ion-card-subtitle>
-          Enter your credential to login.
-        </ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-label position="floating">User</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Password</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-        <ion-button fill="clear" >Sign In</ion-button>
-      </ion-card-content>
-    </ion-card>
-  </ion-content>
+  <ion-page>
+    <ion-content>
+      <div id="container">
+        <ion-card>
+          <ion-card-header>
+            <!-- <ion-img src="../../assets/images/logo.png" alt="ssss"></ion-img> -->
+            <img class="logo" src="../../assets/images/logo.png" alt="logo" />
+          </ion-card-header>
+
+          <ion-card-content>
+            <form>
+              <ion-item>
+                <ion-input
+                  id="custom-input"
+                  label="Nombre"
+                  labelPlacement="floating"
+                >
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-input
+                  id="custom-input"
+                  label="Email"
+                  labelPlacement="floating"
+                >
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-input
+                  id="custom-input"
+                  label="Password"
+                  type="password"
+                  labelPlacement="floating"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-checkbox labelPlacement="end"
+                >Aceptar términos y condiciones</ion-checkbox
+              >
+
+              <ion-button>ingresar</ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-content>
+  </ion-page>
 </template>
 
-<script setup>
-
+<script setup lang="ts">
 import {
+  IonButtons,
+  IonContent,
+  IonPage,
   IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
   IonCardContent,
-  IonItem,
-  IonLabel,
-  IonInput,
-  IonButton
-} from '@ionic/vue';
-
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+} from "@ionic/vue";
 </script>
 
-<style>
+<style scoped>
+#container {
+  background: url("../../assets/images/background2.webp") no-repeat fixed center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+}
 
-ion-content {
-  --background: #e8e8e8;
+.logo {
+  width: 120px;
+  display: inline-block;
+  margin: 0 auto;
 }
 
 ion-card {
-  margin: 10rem auto;
-  max-width: 460px;
-  border-radius: .5rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 8em 4em;
+}
+
+ion-checkbox {
+  margin: 1em;
+}
+
+ion-button {
+  display: block;
+  width: 100%;
+  margin: 1em 0;
+}
+
+@media only screen and (min-width: 756px) {
+  ion-card {
+    width: min(600px, 756px);
+  }
 }
 </style>
