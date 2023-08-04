@@ -82,7 +82,7 @@ ion-card {
   width: 100%;
   height: 100vh;
   margin: 0;
-  padding: 8em 4em;
+  padding: 8em 1em;
 }
 
 ion-checkbox {
@@ -98,6 +98,7 @@ ion-button {
 @media only screen and (min-width: 756px) {
   ion-card {
     width: min(600px, 756px);
+    padding: 8em 4em;
   }
 }
 </style>
