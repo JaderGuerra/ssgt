@@ -5,7 +5,7 @@
         <ion-card>
           <ion-card-header>
             <!-- <ion-img src="../../assets/images/logo.png" alt="ssss"></ion-img> -->
-            <img class="logo" src="../../assets/images/logo.png" alt="logo" />
+            <img class="logo" src="@/assets/images/logo.png" alt="logo" />
           </ion-card-header>
 
           <ion-card-content>
@@ -65,7 +65,7 @@ import {
 
 <style scoped>
 #container {
-  background: url("../../assets/images/background2.webp") no-repeat fixed center;
+  background: url("@/assets/images/background2.webp") no-repeat fixed center;
   width: 100%;
   height: 100vh;
   display: flex;

@@ -3,17 +3,27 @@ import { RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "",
-    redirect: "/login",
-  },
-  {
-    path: "/folder/:id",
-    component: () => import("../views/FolderPage.vue"),
-  },
-  {
     path: "/login",
-    component: () => import("../Modules/Auth/LoginPage.vue"),
+    component: () => import("@/views/Auth/LoginPage.vue"),
   },
+  {
+    path: "/",
+    component: () => import("@/views/Layout.vue"),
+    children: [
+      {
+        path: "",
+        redirect: "people"
+      },
+      {
+        path: "people",
+        component: () => import('@/views/People/PeoplePage.vue')
+      },
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/Shared/404.vue')
+  }
 ];
 
 const router = createRouter({
