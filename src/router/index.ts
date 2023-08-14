@@ -1,23 +1,22 @@
+import { PEOPLE_ROUTES } from "@/views/People/PeopleRouter";
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import { RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/',
+    redirect: '/login',
+    name: 'login'
+  },
+  {
     path: "/login",
     component: () => import("@/views/Auth/LoginPage.vue"),
   },
   {
-    path: "/",
+    path: "/app/",
     component: () => import("@/views/Layout.vue"),
     children: [
-      {
-        path: "",
-        redirect: "people"
-      },
-      {
-        path: "people",
-        component: () => import('@/views/People/PeoplePage.vue')
-      },
+      ...PEOPLE_ROUTES
     ]
   },
   {

@@ -41,7 +41,7 @@
                 >Aceptar términos y condiciones</ion-checkbox
               >
 
-              <ion-button>ingresar</ion-button>
+              <ion-button @click="router.push({name: 'people.list'})">ingresar</ion-button>
             </form>
           </ion-card-content>
         </ion-card>
@@ -52,15 +52,17 @@
 
 <script setup lang="ts">
 import {
-  IonButtons,
   IonContent,
   IonPage,
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
 } from "@ionic/vue";
+
+import { useIonRouter } from "@ionic/vue";
+
+const router = useIonRouter()
+
 </script>
 
 <style scoped>

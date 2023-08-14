@@ -7,7 +7,7 @@
         </ion-buttons>
         <ion-title>People</ion-title>
         <ion-buttons slot="end">
-          <ion-button color="primary" fill="outline">
+          <ion-button color="primary" @click="router.push({name: 'people.create'})">
             <ion-icon slot="start" :icon="add"></ion-icon>
             Add Person
           </ion-button>
@@ -17,7 +17,7 @@
         <ion-searchbar @input="searchbar = $event.target.value" :debounce="400" placeholder="Search by name, ID or email" show-clear-button="focus" :animated="true"></ion-searchbar>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content class="ion-padding" :fullscreen="false">
       <ion-list v-if="people.length" class="list-people">
         <ion-item v-for="person in people" :key="person.id">
           <ion-avatar slot="start">
@@ -34,7 +34,7 @@
       <section class="no-content" v-else>
         <p>No content found.</p>
         <img src="@/assets/images/void.svg">
-        <ion-button color="primary" fill="solid">
+        <ion-button size="small" color="primary" fill="solid" @click="router.push({name: 'people.create'})">
           <ion-icon slot="start" :icon="add"></ion-icon>
           Add Person
         </ion-button>
@@ -45,6 +45,21 @@
 
 <script lang="ts" setup>
 
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonButton,
+  IonSearchbar,
+  IonContent,
+  IonList,
+  IonItem,
+  IonAvatar,
+  IonLabel,
+  useIonRouter
+} from '@ionic/vue';
 import { PeopleService } from './PeopleService'
 import { onMounted, ref, watch } from "vue";
 import { add, person as personIcon } from 'ionicons/icons'
@@ -56,6 +71,7 @@ let searchbar = ref('')
 let page = ref(1)
 let totalPages = ref(0)
 let totalPeople = ref(0)
+const router = useIonRouter()
 
 const setResponse = (response: PersonResponse) => {
   people.value = response.data
@@ -94,6 +110,10 @@ watch(() => page.value, (newPage) => {
 ion-searchbar {
   max-width: 990px;
   margin-inline: auto;
+}
+
+.list-people, .no-content {
+  margin-bottom: 3rem;
 }
 
 .list-people {

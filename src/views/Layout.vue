@@ -16,23 +16,23 @@
         </ion-list>
       </ion-content>
     </ion-menu>
-    <ion-router-outlet id="modules-content"></ion-router-outlet>
+    <ion-router-outlet id="modules-content" name="modules-content"></ion-router-outlet>
   </ion-split-pane>
 </template>
 
 <script setup lang="ts">
 import {
+  IonSplitPane,
+  IonMenu,
   IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
   IonList,
   IonListHeader,
-  IonMenu,
-  IonMenuToggle,
   IonNote,
+  IonMenuToggle,
+  IonItem,
+  IonIcon,
+  IonLabel,
   IonRouterOutlet,
-  IonSplitPane,
 } from "@ionic/vue";
 import { ref } from "vue";
 import {
@@ -44,7 +44,7 @@ const selectedIndex = ref(0);
 const appPages = [
   {
     title: "People",
-    url: "/people",
+    url: "/app/people-list",
     iosIcon: mailOutline,
     mdIcon: mailSharp,
   },
