@@ -17,12 +17,10 @@
         <ion-searchbar @input="searchbar = $event.target.value" :debounce="400" placeholder="Search by name, ID or email" show-clear-button="focus" :animated="true"></ion-searchbar>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding" :fullscreen="false">
-      <ion-list v-if="people.length" class="list-people">
+    <ion-content>
+      <ion-list class="list-people" v-if="people.length" lines="none">
         <ion-item v-for="person in people" :key="person.id">
-          <ion-avatar slot="start">
-            <ion-icon color="medium" size="large" :icon="personIcon"></ion-icon>
-          </ion-avatar>
+          <person-icon slot="start" style="stroke: #3b82f6;"></person-icon>
           <ion-label>
             {{ person.name }}
             <p class="person-data">
@@ -46,6 +44,7 @@
 <script lang="ts" setup>
 
 import {
+  IonPage,
   IonHeader,
   IonToolbar,
   IonButtons,
@@ -56,15 +55,16 @@ import {
   IonContent,
   IonList,
   IonItem,
-  IonAvatar,
   IonLabel,
   useIonRouter
 } from '@ionic/vue';
+
 import { PeopleService } from './PeopleService'
 import { onMounted, ref, watch } from "vue";
-import { add, person as personIcon } from 'ionicons/icons'
+import { add } from 'ionicons/icons'
 import { Person } from "./Person";
 import { PersonResponse } from './PersonResponse';
+import PersonIcon from '@/views/Components/icons/Person.vue'
 
 const people = ref<Person[]>([]);
 let searchbar = ref('')

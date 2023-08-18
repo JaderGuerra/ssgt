@@ -1,6 +1,10 @@
-import { PEOPLE_ROUTES } from "@/views/People/PeopleRouter";
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import { RouteRecordRaw } from "vue-router";
+
+import LoginPage from '@/views/Auth/LoginPage.vue'
+import Layout from "@/views/Shared/Layout.vue"
+
+import { PEOPLE_ROUTES } from "@/views/People/PeopleRouter";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,11 +14,11 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/login",
-    component: () => import("@/views/Auth/LoginPage.vue"),
+    component: LoginPage,
   },
   {
     path: "/app/",
-    component: () => import("@/views/Layout.vue"),
+    component: Layout,
     children: [
       ...PEOPLE_ROUTES
     ]

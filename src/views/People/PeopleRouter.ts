@@ -1,14 +1,21 @@
 import { RouteRecordRaw } from "vue-router";
 
+import ListPeoplePageVue from "./ListPeoplePage.vue";
+import CreatePersonPageVue from "./CreatePersonPage.vue";
+
 export const PEOPLE_ROUTES: RouteRecordRaw[] = [
   {
-    path: 'people-list',
-    component: () => import('@/views/People/ListPeoplePage.vue'),
+    path: '',
+    redirect: '/app/people-list'
+  },
+  {
+    path: '/app/people-list',
+    component: ListPeoplePageVue,
     name: 'people.list'
   },
   {
-    path: 'people-create',
-    component: () => import('@/views/People/CreatePersonPage.vue'),
+    path: '/app/people-create',
+    component: CreatePersonPageVue,
     name: 'people.create'
   }
 ]
