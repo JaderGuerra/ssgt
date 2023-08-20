@@ -1,14 +1,8 @@
 <template>
-  <ion-split-pane content-id="modules-content">
-    <ion-menu content-id="modules-content" type="overlay">
+  <ion-split-pane :style="{...(expanded ? {'--side-min-width': '15rem', '--side-max-width': '15rem'} : {})}" when="md" content-id="modules-content">
+    <ion-menu content-id="modules-content" type="push">
       <ion-content>
-        <nav>
-          <navigation-menu></navigation-menu>
-          <ion-button color="danger" expand="block" style="margin: .5rem;" router-link="/login">
-            Logout
-            <logout slot="end" style="margin-left: 1rem;"></logout>
-          </ion-button>
-        </nav>
+        <navigation-menu @expand="expand" :expanded="expanded"></navigation-menu>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="modules-content"></ion-router-outlet>
@@ -16,26 +10,33 @@
 </template>
 
 <script setup lang="ts">
-
 import {
   IonSplitPane,
   IonMenu,
-  IonButton,
   IonRouterOutlet,
 } from "@ionic/vue";
-
+import { ref } from "vue";
 import NavigationMenu from '../Components/NavigationMenu.vue';
-import Logout from '@/views/Components/icons/Logout.vue';
+
+let expanded = ref(false)
+const expand = () => {
+  expanded.value = !expanded.value
+}
 </script>
 
 <style scoped>
-ion-split-pane {
-  --side-max-width: 15rem;
+
+@media (min-width: 768px) {
+  ion-split-pane {
+    --side-max-width: 5rem;
+    --side-min-width: 5rem;
+  }
 }
-nav {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
+@media (min-width: 1024px) {
+  ion-split-pane {
+    --side-max-width: 17rem;
+    --side-min-width: 17rem;
+  }
 }
 </style>
