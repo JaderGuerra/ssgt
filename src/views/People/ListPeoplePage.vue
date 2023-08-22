@@ -32,7 +32,7 @@
       <section class="no-content" v-else>
         <p>No content found.</p>
         <img src="@/assets/images/void.svg">
-        <ion-button size="small" color="primary" fill="solid" @click="router.push({name: 'people.create'})">
+        <ion-button size="small" color="primary" fill="solid" router-link="people-create">
           <ion-icon slot="start" :icon="add"></ion-icon>
           Add Person
         </ion-button>
@@ -56,7 +56,6 @@ import {
   IonList,
   IonItem,
   IonLabel,
-  useIonRouter
 } from '@ionic/vue';
 
 import { PeopleService } from './PeopleService'

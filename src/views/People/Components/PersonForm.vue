@@ -3,28 +3,28 @@
     <ion-row>
       <ion-col size="12" size-md="6">
         <ion-item lines="full">
-          <ion-icon :icon="personOutline" slot="start" color="primary"></ion-icon>
-          <ion-input :value="personForm?.name" label="Name" label-placement="floating" :clear-on-edit="true" type="text">
+          <person-icon slot="start" stroke="var(--ion-color-primary)"></person-icon>
+          <ion-input :model="personForm?.name" label="Name" label-placement="floating" :clear-on-edit="true" type="text">
           </ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12" size-md="6">
         <ion-item lines="full">
-          <ion-icon :icon="cardOutline" slot="start" color="warning"></ion-icon>
+          <identification slot="start" stroke="var(--ion-color-warning)"></identification>
           <ion-input :value="personForm?.identification" label="Identification" label-placement="floating" :clear-on-edit="true" type="text">
           </ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12" size-md="6">
         <ion-item lines="full">
-          <ion-icon :icon="at" slot="start" color="success"></ion-icon>
+          <at-icon slot="start" stroke="var(--ion-color-success)"></at-icon>
           <ion-input :value="personForm?.email" label="Email" label-placement="floating" :clear-on-edit="true" type="email">
           </ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12" size-md="6">
         <ion-item lines="full">
-          <ion-icon :icon="phonePortraitOutline" slot="start" color="medium"></ion-icon>
+          <mobile slot="start" stroke="var(--ion-color-medium)"></mobile>
           <ion-input :value="personForm?.phone" label="Phone" label-placement="floating" :clear-on-edit="true" type="tel">
           </ion-input>
         </ion-item>
@@ -36,7 +36,10 @@
   </ion-grid>
 </template>
 <script lang="ts" setup>
-import  { Person } from './Person'
+import  PersonIcon from '../../Components/icons/Person.vue'
+import Identification from '../../Components/icons/Identification.vue';
+import AtIcon from '../../Components/icons/At.vue';
+import mobile from '../../Components/icons/Mobile.vue';
 import {
   IonGrid,
   IonRow,
@@ -46,8 +49,8 @@ import {
   IonInput,
   IonButton
 } from '@ionic/vue'
-import { personOutline, at, cardOutline, phonePortraitOutline } from 'ionicons/icons';
 import { ref } from 'vue';
+import { Person } from '../Person';
 
 const props = defineProps<{
   person?: Person
