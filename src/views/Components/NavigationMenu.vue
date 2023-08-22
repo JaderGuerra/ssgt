@@ -5,34 +5,34 @@
         <ion-thumbnail>
           <img  class="logo" src="@/assets/images/logo.png" alt="logo" />
         </ion-thumbnail>
-        <ion-label>
+        <ion-label :class="{'expandedLabel': expanded}">
           SGSST
           <p>sailormoon@example.com</p>
         </ion-label>
       </ion-list-header>
       <ion-item router-link="/app/people-list" button :detail="false">
-        <analitics class="menu-icon" :style="{...(expanded ? {'margin-right': '1rem'} : {})}"></analitics>
-        <ion-label class="label" :style="{...(expanded ? {'display': 'initial'} : {})}">Dashboard</ion-label>
+        <analitics class="menu-icon" :class="{'expandedIcon': expanded}"></analitics>
+        <ion-label class="label" :class="{'expandedLabel': expanded}">Dashboard</ion-label>
       </ion-item>
       <ion-item router-link="/app/people-list" class="item-active" button :detail="false">
-        <people class="menu-icon" :style="{...(expanded ? {'margin-right': '1rem'} : {})}"></people>
-        <ion-label class="label" :style="{...(expanded ? {'display': 'initial'} : {})}">People</ion-label>
+        <people class="menu-icon" :class="{'expandedIcon': expanded}"></people>
+        <ion-label class="label" :class="{'expandedLabel': expanded}">People</ion-label>
       </ion-item>
       <ion-item router-link="/app/people-list" button :detail="false">
-        <tutors class="menu-icon" :style="{...(expanded ? {'margin-right': '1rem'} : {})}"></tutors>
-        <ion-label class="label" :style="{...(expanded ? {'display': 'initial'} : {})}">Tutors</ion-label>
+        <tutors class="menu-icon" :class="{'expandedIcon': expanded}"></tutors>
+        <ion-label class="label" :class="{'expandedLabel': expanded}">Tutors</ion-label>
       </ion-item>
       <ion-item router-link="/app/people-list" button :detail="false">
-        <courses class="menu-icon" :style="{...(expanded ? {'margin-right': '1rem'} : {})}"></courses>
-        <ion-label class="label" :style="{...(expanded ? {'display': 'initial'} : {})}">Courses</ion-label>
+        <courses class="menu-icon" :class="{'expandedIcon': expanded}"></courses>
+        <ion-label class="label" :class="{'expandedLabel': expanded}">Courses</ion-label>
       </ion-item>
-      <ion-item @click="$emit('expand')" class="expand" button :detail="false">
-        <collapse class="menu-icon" :style="{...(expanded ? {'margin-right': '1rem'} : {})}"></collapse>
-        <ion-label class="label" :style="{...(expanded ? {'display': 'initial'} : {})}">Expand</ion-label>
+      <ion-item @click="$emit('expand')" class="expandBtn" button :detail="false">
+        <collapse class="menu-icon" :class="{'expandedIcon': expanded}"></collapse>
+        <ion-label class="label" :class="{'expandedLabel': expanded}">Expand</ion-label>
       </ion-item>
     </ion-list>
     <ion-item color="light" lines="none" button :detail="false" router-link="/login">
-      <ion-labe class="label">Logout</ion-labe>
+      <ion-label class="label" :class="{'expandedLabel': expanded}">Logout</ion-label>
       <logout slot="end"></logout>
     </ion-item>
   </nav>
@@ -52,7 +52,7 @@ import Collapse from './icons/Collapse.vue'
 import Logout from '@/views/Components/icons/Logout.vue';
 
 defineEmits(['expand'])
-defineProps<{expanded: boolean}>()
+defineProps<{ expanded: boolean }>()
 </script>
 
 <style scoped>
@@ -84,10 +84,14 @@ ion-item {
   position: relative;
 }
 
+ion-label.expandedLabel {
+  display: initial;
+}
+
 ion-item.item-active {
   --background: #3b82f6;
 }
-.expand {
+.expandBtn {
   display: none;
 }
 
@@ -103,12 +107,15 @@ ion-item.item-active {
 .menu-icon {
   margin-right: 1rem;
 }
+.menu-icon.expandedIcon {
+  margin-right: 1rem;
+}
 
 @media screen and (min-width: 768px) {
   ion-list-header ion-label {
     display: none;
   }
-  .expand {
+  .expandBtn {
     display: block;
   }
   .menu-icon {
@@ -124,7 +131,7 @@ ion-item.item-active {
   ion-list-header ion-label {
     display: initial;
   }
-  .expand {
+  .expandBtn {
     display: none;
   }
   .menu-icon {

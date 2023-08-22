@@ -1,6 +1,6 @@
 <template>
-  <ion-split-pane :style="{...(expanded ? {'--side-min-width': '15rem', '--side-max-width': '15rem'} : {})}" when="md" content-id="modules-content">
-    <ion-menu content-id="modules-content" type="push">
+  <ion-split-pane :class="{'splitPaneExpanded': expanded}" when="md" content-id="modules-content">
+    <ion-menu content-id="modules-content" type="reveal">
       <ion-content>
         <navigation-menu @expand="expand" :expanded="expanded"></navigation-menu>
       </ion-content>
@@ -25,6 +25,11 @@ const expand = () => {
 </script>
 
 <style scoped>
+
+.splitPaneExpanded {
+  --side-min-width: 17rem;
+  --side-max-width: 17rem;
+}
 
 @media (min-width: 768px) {
   ion-split-pane {
