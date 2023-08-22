@@ -10,9 +10,12 @@
           <p>sailormoon@example.com</p>
         </ion-label>
       </ion-list-header>
+      <ion-item-divider mode="md">
+        <ion-label color="primary">MENU</ion-label>
+      </ion-item-divider>
       <ion-item router-link="/app/people-list" button :detail="false">
-        <analitics class="menu-icon" :class="{'expandedIcon': expanded}"></analitics>
-        <ion-label class="label" :class="{'expandedLabel': expanded}">Dashboard</ion-label>
+        <home class="menu-icon" :class="{'expandedIcon': expanded}"></home>
+        <ion-label class="label" :class="{'expandedLabel': expanded}">Home</ion-label>
       </ion-item>
       <ion-item router-link="/app/people-list" class="item-active" button :detail="false">
         <people class="menu-icon" :class="{'expandedIcon': expanded}"></people>
@@ -26,15 +29,20 @@
         <courses class="menu-icon" :class="{'expandedIcon': expanded}"></courses>
         <ion-label class="label" :class="{'expandedLabel': expanded}">Courses</ion-label>
       </ion-item>
-      <ion-item @click="$emit('expand')" class="expandBtn" button :detail="false">
+
+      <ion-item-divider mode="md">
+        <ion-label color="secondary">OPTIONS</ion-label>
+      </ion-item-divider>
+
+      <ion-item @click="$emit('expand')" class="expandBtn" :class="{expanded}" button :detail="false">
         <collapse class="menu-icon" :class="{'expandedIcon': expanded}"></collapse>
         <ion-label class="label" :class="{'expandedLabel': expanded}">Expand</ion-label>
       </ion-item>
+      <ion-item lines="none" button :detail="false" router-link="/login">
+        <logout class="menu-icon" :class="{'expandedIcon': expanded}"></logout>
+        <ion-label class="label" :class="{'expandedLabel': expanded}">Logout</ion-label>
+      </ion-item>
     </ion-list>
-    <ion-item color="light" lines="none" button :detail="false" router-link="/login">
-      <ion-label class="label" :class="{'expandedLabel': expanded}">Logout</ion-label>
-      <logout slot="end"></logout>
-    </ion-item>
   </nav>
 </template>
 
@@ -43,8 +51,9 @@ import {
   IonList,
   IonItem,
   IonLabel,
+  IonItemDivider
 } from '@ionic/vue'
-import Analitics from './icons/Analytics.vue'
+import Home from './icons/Home.vue'
 import People from './icons/People.vue'
 import Tutors from './icons/Tutors.vue'
 import Courses from './icons/Courses.vue'
@@ -78,6 +87,7 @@ ion-list-header ion-thumbnail {
 }
 
 ion-item {
+  margin-top: .5rem;
   margin-bottom: .5rem;
   margin-inline: .5rem;
   border-radius: .25rem;
@@ -93,6 +103,11 @@ ion-item.item-active {
 }
 .expandBtn {
   display: none;
+  border: 1px solid transparent;
+}
+.expandBtn.expanded {
+  border-color: var(--ion-color-secondary);
+  --background: var(--ion-color-secondary);
 }
 
 .item-active svg {
