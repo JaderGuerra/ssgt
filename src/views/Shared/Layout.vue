@@ -1,12 +1,14 @@
 <template>
-  <ion-split-pane :class="{'splitPaneExpanded': expanded}" when="md" content-id="modules-content">
-    <ion-menu content-id="modules-content" type="reveal">
-      <ion-content>
-        <navigation-menu @expand="expand" :expanded="expanded"></navigation-menu>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="modules-content"></ion-router-outlet>
-  </ion-split-pane>
+  <ion-page>
+    <ion-split-pane :class="{'splitPaneExpanded': expanded}" when="md" content-id="modules-content">
+      <ion-menu content-id="modules-content" type="reveal">
+        <ion-content>
+          <navigation-menu @expand="expand" :expanded="expanded"></navigation-menu>
+        </ion-content>
+      </ion-menu>
+      <ion-router-outlet id="modules-content"></ion-router-outlet>
+    </ion-split-pane>
+  </ion-page>
 </template>
 
 <script setup lang="ts">
@@ -14,6 +16,7 @@ import {
   IonSplitPane,
   IonMenu,
   IonRouterOutlet,
+  IonPage
 } from "@ionic/vue";
 import { ref } from "vue";
 import NavigationMenu from '../Components/NavigationMenu.vue';

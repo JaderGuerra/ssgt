@@ -14,7 +14,7 @@ export const PEOPLE_ROUTES: RouteRecordRaw[] = [
     name: 'people.list'
   },
   {
-    path: '/app/people-create',
+    path: '/app/people-create/:id?',
     component: CreatePersonPageVue,
     name: 'people.create'
   }

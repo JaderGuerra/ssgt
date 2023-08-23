@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
+    <ion-header :translucent="true" collapse="fade">
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
@@ -17,26 +17,33 @@
         <ion-searchbar @input="searchbar = $event.target.value" :debounce="400" placeholder="Search by name, ID or email" show-clear-button="focus" :animated="true"></ion-searchbar>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
-      <ion-list class="list-people" v-if="people.length" lines="none">
-        <ion-item v-for="person in people" :key="person.id">
-          <person-icon slot="start" style="stroke: #3b82f6;"></person-icon>
-          <ion-label>
-            {{ person.name }}
-            <p class="person-data">
-              ID: {{ person.identification }} | {{ person.email }}
-            </p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-      <section class="no-content" v-else>
-        <p>No content found.</p>
-        <img src="@/assets/images/void.svg">
-        <ion-button size="small" color="primary" fill="solid" router-link="people-create">
-          <ion-icon slot="start" :icon="add"></ion-icon>
-          Add Person
-        </ion-button>
-      </section>
+    <ion-content :fullscreen="true">
+      <main>
+        <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">People</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-list class="list-people" v-if="people.length" lines="none">
+          <ion-item v-for="person in people" :key="person.id" button :router-link="{name: 'people.create', params: {id: person.id}}">
+            <person-icon slot="start" style="stroke: #3b82f6;"></person-icon>
+            <ion-label>
+              {{ person.name }}
+              <p class="person-data">
+                ID: {{ person.identification }} | {{ person.email }}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <section class="no-content" v-else>
+          <p>No content found.</p>
+          <img src="@/assets/images/void.svg">
+          <ion-button size="small" color="primary" fill="solid" router-link="people-create">
+            <ion-icon slot="start" :icon="add"></ion-icon>
+            Add Person
+          </ion-button>
+        </section>
+      </main>
     </ion-content>
   </ion-page>
 </template>
@@ -105,17 +112,13 @@ watch(() => page.value, (newPage) => {
 
 <style scoped>
 
-ion-searchbar {
-  max-width: 990px;
+header {
+  max-width: 72rem;
   margin-inline: auto;
 }
 
-.list-people, .no-content {
-  margin-bottom: 3rem;
-}
-
-.list-people {
-  max-width: 990px;
+main {
+  max-width: 72rem;
   margin: auto;
 }
 
@@ -131,7 +134,7 @@ p.person-data {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 3rem auto;
+  margin: auto;
 }
 
 .no-content img {

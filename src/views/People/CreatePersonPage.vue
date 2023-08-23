@@ -7,15 +7,12 @@
         </ion-buttons>
         <ion-title>Create Person</ion-title>
         <ion-buttons slot="end">
-          <ion-button router-link="people-list">
-            <chevron-left slot="start" stroke="var(--ion-color-primary)"></chevron-left>
-            Back
-          </ion-button>
+          <ion-back-button></ion-back-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <PersonForm></PersonForm>
+      <PersonForm @person-value="personValue($event)" :person="person"></PersonForm>
     </ion-content>
   </ion-page>
 </template>
@@ -27,11 +24,28 @@ import {
   IonToolbar,
   IonButtons,
   IonMenuButton,
+  IonBackButton,
   IonTitle,
   IonContent,
 } from '@ionic/vue'
 import PersonForm from './Components/PersonForm.vue';
-import ChevronLeft from '../Components/icons/ChevronLeft.vue';
+import { Person } from './Person';
+import { PeopleService } from './PeopleService';
+import { onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+let person = ref<Person>()
+const { id } = route.params
+
+onMounted(async () => {
+  if (!id) return
+  person = await PeopleService.getPerson(id as string)
+})
+
+const personValue = (person: Person) => {
+  PeopleService.savePerson(person)
+}
 </script>
 
 
