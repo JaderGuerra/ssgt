@@ -13,28 +13,24 @@
       <ion-item-divider mode="md">
         <ion-label color="primary">MENU</ion-label>
       </ion-item-divider>
-      <ion-item router-link="/app/people-list" button :detail="false">
-        <home class="menu-icon" :class="{'expandedIcon': expanded}"></home>
-        <ion-label class="label" :class="{'expandedLabel': expanded}">Home</ion-label>
-      </ion-item>
-      <ion-item router-link="/app/people-list" class="item-active" button :detail="false">
-        <people class="menu-icon" :class="{'expandedIcon': expanded}"></people>
-        <ion-label class="label" :class="{'expandedLabel': expanded}">People</ion-label>
-      </ion-item>
-      <ion-item router-link="/app/people-list" button :detail="false">
-        <tutors class="menu-icon" :class="{'expandedIcon': expanded}"></tutors>
-        <ion-label class="label" :class="{'expandedLabel': expanded}">Tutors</ion-label>
-      </ion-item>
-      <ion-item router-link="/app/people-list" button :detail="false">
-        <courses class="menu-icon" :class="{'expandedIcon': expanded}"></courses>
-        <ion-label class="label" :class="{'expandedLabel': expanded}">Courses</ion-label>
-      </ion-item>
+        <ion-item
+          button
+          v-for="r in routes"
+          @click="handleExpand"
+          :router-link="r.route"
+          router-direction="root"
+          :detail="false"
+          :class="{'item-active': route.path.startsWith(r.route)}"
+        >
+          <component :is="r.icon" class="menu-icon" :class="{'expandedIcon': expanded}"></component>
+          <ion-label class="label" :class="{'expandedLabel': expanded}">{{ r.label }}</ion-label>
+        </ion-item>
 
       <ion-item-divider mode="md">
         <ion-label color="secondary">OPTIONS</ion-label>
       </ion-item-divider>
 
-      <ion-item @click="$emit('expand')" class="expandBtn" :class="{expanded}" button :detail="false">
+      <ion-item @click="emit('expand')" class="expandBtn" :class="{expanded}" button :detail="false">
         <collapse class="menu-icon" :class="{'expandedIcon': expanded}"></collapse>
         <ion-label class="label" :class="{'expandedLabel': expanded}">Expand</ion-label>
       </ion-item>
@@ -51,7 +47,7 @@ import {
   IonList,
   IonItem,
   IonLabel,
-  IonItemDivider
+  IonItemDivider,
 } from '@ionic/vue'
 import Home from './icons/Home.vue'
 import People from './icons/People.vue'
@@ -59,11 +55,41 @@ import Tutors from './icons/Tutors.vue'
 import Courses from './icons/Courses.vue'
 import Collapse from './icons/Collapse.vue'
 import Logout from '@/views/Components/icons/Logout.vue';
+import { useRoute } from 'vue-router'
 
-defineEmits(['expand'])
-defineProps<{ expanded: boolean }>()
+const emit = defineEmits(['expand'])
+const props = defineProps<{ expanded: boolean }>()
+
+const handleExpand = () => {
+  if (props.expanded) {
+    emit('expand')
+  }
+}
+
+let route = useRoute()
+const routes = [
+  {
+    route: '/app/home',
+    icon: Home,
+    label: 'Home'
+  },
+  {
+    route: '/app/people-list',
+    icon: People,
+    label: 'People'
+  },
+  {
+    route: '/app/teachers-list',
+    icon: Tutors,
+    label: 'Teachers'
+  },
+  {
+    route: '/app/courses-list',
+    icon: Courses,
+    label: 'Courses'
+  },
+]
 </script>
-
 <style scoped>
 nav {
   height: 100%;
