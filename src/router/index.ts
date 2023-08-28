@@ -5,6 +5,7 @@ import LoginPage from '@/views/Auth/LoginPage.vue'
 import Layout from "@/views/Shared/Layout.vue"
 
 import { PEOPLE_ROUTES } from "@/views/People/PeopleRouter";
+import { TEACHER_ROUTES } from "@/views/Teacher/TeacherRoutes";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,7 +21,8 @@ const routes: Array<RouteRecordRaw> = [
     path: "/app/",
     component: Layout,
     children: [
-      ...PEOPLE_ROUTES
+      ...PEOPLE_ROUTES,
+      ...TEACHER_ROUTES
     ]
   },
   {

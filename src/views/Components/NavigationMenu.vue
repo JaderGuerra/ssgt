@@ -49,13 +49,11 @@ import {
   IonLabel,
   IonItemDivider,
 } from '@ionic/vue'
-import Home from './icons/Home.vue'
-import People from './icons/People.vue'
-import Tutors from './icons/Tutors.vue'
-import Courses from './icons/Courses.vue'
+
 import Collapse from './icons/Collapse.vue'
 import Logout from '@/views/Components/icons/Logout.vue';
 import { useRoute } from 'vue-router'
+import { navigationRoutes } from '@/router/navigation';
 
 const emit = defineEmits(['expand'])
 const props = defineProps<{ expanded: boolean }>()
@@ -67,28 +65,7 @@ const handleExpand = () => {
 }
 
 let route = useRoute()
-const routes = [
-  {
-    route: '/app/home',
-    icon: Home,
-    label: 'Home'
-  },
-  {
-    route: '/app/people-list',
-    icon: People,
-    label: 'People'
-  },
-  {
-    route: '/app/teachers-list',
-    icon: Tutors,
-    label: 'Teachers'
-  },
-  {
-    route: '/app/courses-list',
-    icon: Courses,
-    label: 'Courses'
-  },
-]
+const routes = navigationRoutes
 </script>
 <style scoped>
 nav {
