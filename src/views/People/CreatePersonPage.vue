@@ -12,7 +12,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <PersonForm @person-value="personValue($event)" :person="person"></PersonForm>
+      <PersonForm @person-value="savePerson($event)" :person="person"></PersonForm>
     </ion-content>
   </ion-page>
 </template>
@@ -28,23 +28,36 @@ import {
   IonTitle,
   IonContent,
 } from '@ionic/vue'
+
 import PersonForm from './Components/PersonForm.vue';
 import { Person } from './Person';
 import { PeopleService } from './PeopleService';
-import { onMounted, ref, watch } from 'vue';
+import { Ref, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
-let person = ref<Person>()
+let person: Ref<Person> = ref({
+  name: '',
+  identification: '',
+  email: '',
+  phone: ''
+})
 const { id } = route.params
 
 onMounted(async () => {
   if (!id) return
-  person = await PeopleService.getPerson(id as string)
+  person.value = await PeopleService.getPerson(id as string)
 })
 
-const personValue = (person: Person) => {
-  PeopleService.savePerson(person)
+const savePerson = async (person: Person) => {
+  if (person.id) {
+    // Update
+    await PeopleService.updatePerson(person.id, person)
+  }
+  else {
+    // Create
+    await PeopleService.savePerson(person)
+  }
 }
 </script>
 

@@ -21,6 +21,17 @@ export class PeopleService {
     return await response.json()
   }
 
+  public static async updatePerson(id: string, person: Person): Promise<Person> {
+    const response = await fetch(`${this.url}/api/person/${id}`, {
+      method: 'put',
+      body: JSON.stringify(person),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    return await response.json()
+  }
+
   public static async getPerson(id: string): Promise<any | Person> {
     const response = await fetch(`${this.url}/api/person/${id}`)
     return await response.json()

@@ -8,7 +8,7 @@
             stroke="var(--ion-color-primary)"
           ></person-icon>
           <ion-input
-            v-model="name"
+            v-model="personForm.name"
             label="Name"
             label-placement="floating"
             :clear-on-edit="true"
@@ -26,7 +26,7 @@
             stroke="var(--ion-color-warning)"
           ></identification>
           <ion-input
-            v-model="identification"
+            v-model="personForm.identification"
             label="Identification"
             label-placement="floating"
             :clear-on-edit="true"
@@ -41,7 +41,7 @@
         <ion-item lines="full">
           <at-icon slot="start" stroke="var(--ion-color-success)"></at-icon>
           <ion-input
-            v-model="email"
+            v-model="personForm.email"
             label="Email"
             label-placement="floating"
             :clear-on-edit="true"
@@ -56,7 +56,7 @@
         <ion-item lines="full">
           <mobile slot="start" stroke="var(--ion-color-medium)"></mobile>
           <ion-input
-            v-model="phone"
+            v-model="personForm.phone"
             label="Phone"
             label-placement="floating"
             :clear-on-edit="true"
@@ -91,27 +91,16 @@ import {
   IonInput,
   IonButton,
 } from "@ionic/vue";
-import { computed, ref } from "vue";
+import { Ref, ref, watch } from "vue";
 import { Person } from "../Person";
 
-const props = defineProps<{
-  person?: Person;
-}>();
+const props = defineProps<{person: Person}>();
 defineEmits(['personValue']);
 
-let name = ref(props?.person?.name ?? '');
-let identification = ref(props?.person?.identification ?? '');
-let email = ref(props?.person?.email ?? '');
-let phone = ref(props?.person?.phone ?? '');
+let personForm: Ref<Person> = ref(props.person)
 
-let personForm = computed(() => {
-  return {
-    name: name.value,
-    identification: identification.value,
-    email: email.value,
-    phone: phone.value
-  }
-})
+watch(() => props.person, (person) => personForm.value = person)
+
 </script>
 
 <style scoped>
